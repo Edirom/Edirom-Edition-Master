@@ -64,6 +64,9 @@
             <fileset dir="${uri.edition}" defaultexcludes="yes" excludes="local.properties **/*.jpg" includes="**" />
             <fileset dir="assets-exist-packaging/" defaultexcludes="yes" includes="**" />
         </copy>
+        <copy todir="${dir.build}/${title.short}/">
+            <fileset dir="${uri.edition}" defaultexcludes="yes" includes="**/*.jpg" />
+        </copy>
     </target>
 
     <target name="reset" depends="properties.load">
