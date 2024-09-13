@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project basedir="." name="bazga.edition">
+
     <available file="${uri.edition}/local.properties" property="properties.local.available" />
+
     <target name="properties.load" depends="properties.local.load">
         <loadproperties srcfile="build.properties" />
         <echoproperties />
     </target>
+
     <target name="properties.local.load" if="${properties.local.available}">
         <loadproperties srcfile="${uri.edition}/local.properties" />
     </target>
+
     <target name="properties.local.create" description="Stores a copy of build.properties as local.properties" depends="properties.load">
         <copy file="build.properties" tofile="${uri.edition}/local.properties" />
     </target>
+
     <target name="init.sample-edition" depends="properties.load">
         <mkdir dir="${title.short}" />
         <copy file="build.properties" tofile="${title.short}/local.properties" />
     </target>
+
     <target name="clean" depends="properties.load">
         <delete dir="${dir.build}" />
     </target>
+
     <target name="build" depends="properties.load, clean">
         <mkdir dir="${dir.build}" />
         <copy todir="${dir.build}/${title.short}/">
@@ -58,12 +65,15 @@
             <fileset dir="assets-exist-packaging/" includes="**" />
         </copy>
     </target>
+
     <target name="reset" depends="properties.load">
         <delete dir="${dir.build}" />
         <delete dir="${dir.dist}" />
     </target>
+
     <target name="xar" depends="build">
         <mkdir dir="${dir.dist}" />
         <zip basedir="${dir.build}/${title.short}/" destfile="${dir.dist}/${title.short}.xar" />
     </target>
+
 </project>
